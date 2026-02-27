@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revvel Forensic Studio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0a0a0f;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-bottom: 1px solid #2d3748;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    header h1 { font-size: 1.4rem; font-weight: 700; color: #fff; }
+    header p { font-size: 0.8rem; color: #a0aec0; margin-top: 2px; }
+    .badge {
+      margin-left: auto;
+      background: #22543d; color: #68d391;
+      padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    }
+    main { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+    .hero {
+      text-align: center; margin-bottom: 3.5rem;
+    }
+    .hero h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem;
+      background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p { font-size: 1.05rem; color: #a0aec0; max-width: 600px; margin: 0 auto 2rem; line-height: 1.7; }
+    .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600;
+      text-decoration: none; font-size: 0.95rem; transition: all 0.2s;
+      cursor: pointer; border: none;
+    }
+    .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: #a0aec0; border: 1px solid #4a5568; }
+    .btn-outline:hover { border-color: #667eea; color: #667eea; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+    .card {
+      background: #111827; border: 1px solid #1f2937;
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: #667eea; transform: translateY(-2px); }
+    .card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: #f7fafc; }
+    .card p { font-size: 0.875rem; color: #718096; line-height: 1.6; }
+    .endpoints {
+      background: #111827; border: 1px solid #1f2937;
+      border-radius: 12px; padding: 2rem; margin-bottom: 3rem;
+    }
+    .endpoints h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: #f7fafc; }
+    .endpoint-group { margin-bottom: 1.5rem; }
+    .endpoint-group h4 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: #667eea; margin-bottom: 0.75rem; }
+    .endpoint-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .endpoint-tag {
+      background: #1a202c; border: 1px solid #2d3748;
+      color: #a0aec0; padding: 0.3rem 0.75rem;
+      border-radius: 6px; font-size: 0.8rem; font-family: monospace;
+    }
+    .status-bar {
+      background: #111827; border: 1px solid #1f2937;
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .status-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #a0aec0; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #68d391; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.5} }
+    footer { text-align: center; padding: 2rem; color: #4a5568; font-size: 0.8rem; border-top: 1px solid #1f2937; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">🔬</div>
+    <div>
+      <h1>Revvel Forensic Studio</h1>
+      <p>Image Analysis &amp; Forensic Intelligence API</p>
+    </div>
+    <span class="badge">● API v2.0.0</span>
+  </header>
+  <main>
+    <div class="hero">
+      <h2>Forensic Image Intelligence</h2>
+      <p>Advanced image processing combining beauty enhancement with forensic analysis tools — mask detection, face reconstruction, EXIF analysis, and more.</p>
+      <div class="btn-group">
+        <a href="/forensicstudio/docs" class="btn btn-primary">📖 API Documentation</a>
+        <a href="/forensicstudio/redoc" class="btn btn-outline">📋 ReDoc Reference</a>
+        <a href="/forensicstudio/health" class="btn btn-outline">🩺 Health Check</a>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">💄</div>
+        <h3>Beauty Enhancement</h3>
+        <p>YouCam-style face beautification, skin smoothing, makeup application, teeth whitening, and batch processing for 20–100+ images.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🕵️</div>
+        <h3>Forensic Analysis</h3>
+        <p>Mask detection, face reconstruction from partial images, EXIF metadata extraction, object detection, and layer decomposition.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔍</div>
+        <h3>Zoom &amp; Enhance</h3>
+        <p>Intelligent upscaling and detail enhancement for arms, wrists, background objects, and edge enhancement using lighting patterns.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Webhooks &amp; Rate Limiting</h3>
+        <p>Async job completion callbacks, per-key rate limiting, and full API key management with create, revoke, and list operations.</p>
+      </div>
+    </div>
+    <div class="endpoints">
+      <h3>Available Endpoints</h3>
+      <div class="endpoint-group">
+        <h4>Beauty</h4>
+        <div class="endpoint-list">
+          <span class="endpoint-tag">POST /enhance</span>
+          <span class="endpoint-tag">POST /batch-enhance</span>
+        </div>
+      </div>
+      <div class="endpoint-group">
+        <h4>Forensics</h4>
+        <div class="endpoint-list">
+          <span class="endpoint-tag">POST /detect-mask</span>
+          <span class="endpoint-tag">POST /reconstruct-face</span>
+          <span class="endpoint-tag">POST /analyze-exif</span>
+          <span class="endpoint-tag">POST /detect-objects</span>
+          <span class="endpoint-tag">POST /decompose-layers</span>
+          <span class="endpoint-tag">POST /enhance-edges</span>
+          <span class="endpoint-tag">POST /zoom-enhance</span>
+          <span class="endpoint-tag">POST /full-analysis</span>
+        </div>
+      </div>
+      <div class="endpoint-group">
+        <h4>Keys &amp; Billing</h4>
+        <div class="endpoint-list">
+          <span class="endpoint-tag">GET/POST /keys</span>
+          <span class="endpoint-tag">GET /rate-limit-status</span>
+          <span class="endpoint-tag">GET /billing/config</span>
+        </div>
+      </div>
+    </div>
+    <div class="status-bar">
+      <div class="status-item"><span class="dot"></span> API Online</div>
+      <div class="status-item">🔐 API Key Required for endpoints</div>
+      <div class="status-item">📦 Version 2.0.0</div>
+      <div class="status-item">🚀 FastAPI + OpenCV + MediaPipe</div>
+    </div>
+  </main>
+  <footer>Revvel Forensic Studio — Powered by FastAPI &amp; OpenCV</footer>
+</body>
+</html>

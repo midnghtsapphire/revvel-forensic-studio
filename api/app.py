@@ -30,7 +30,8 @@ from functools import wraps
 import cv2
 import numpy as np
 from fastapi import FastAPI, File, UploadFile, HTTPException, Form, Depends, Header, Request, BackgroundTasks
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import requests as http_requests
@@ -494,23 +495,13 @@ async def full_analysis(
 # Routes — Utility
 # ---------------------------------------------------------------------------
 
-@app.get("/", tags=["Utility"])
+@app.get("/", tags=["Utility"], response_class=HTMLResponse)
 async def root():
-    return {
-        "name": "Revvel Forensic API",
-        "version": "2.0.0",
-        "docs": "/docs",
-        "redoc": "/redoc",
-        "endpoints": {
-            "beauty": ["/enhance", "/batch-enhance"],
-            "forensics": [
-                "/detect-mask", "/reconstruct-face", "/analyze-exif",
-                "/detect-objects", "/decompose-layers", "/enhance-edges",
-                "/zoom-enhance", "/full-analysis",
-            ],
-            "keys": ["/keys"],
-        },
-    }
+    """Serve the Forensic Studio UI landing page."""
+    static_index = Path(__file__).parent / "static" / "index.html"
+    if static_index.exists():
+        return HTMLResponse(content=static_index.read_text(), status_code=200)
+    return HTMLResponse(content="<h1>Revvel Forensic Studio API v2.0.0</h1>", status_code=200)
 
 
 @app.get("/health", tags=["Utility"])
