@@ -85,3 +85,12 @@ python mcp/server.py
 ## License
 
 MIT License
+
+---
+
+## Test
+
+| Feature | Status |
+|---------|--------|
+| Feature | ✅ Ready |
+
