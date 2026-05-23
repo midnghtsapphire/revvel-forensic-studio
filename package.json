@@ -1,0 +1,10 @@
+{
+  "name": "revvel-forensic-studio",
+  "version": "2.0.1",
+  "private": true,
+  "description": "Revvel-standards baseline manifest for revvel-forensic-studio",
+  "scripts": {
+    "test": "node scripts/test-baseline.js",
+    "build": "node scripts/build-baseline.js"
+  }
+}

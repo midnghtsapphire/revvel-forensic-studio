@@ -62,6 +62,30 @@ uvicorn api.main:app --host 0.0.0.0 --port 8000
 python mcp/server.py
 ```
 
+## Website in Test (Vercel)
+
+- URL: https://revvel-forensic-studio.vercel.app
+- Deployment automation: see `/DEPLOYMENT_GUIDE.md` for Vercel + container deployment steps.
+
+## Revvel-Standards Artifacts
+
+- `CHANGELOG.md`
+- `DEPLOYMENT_GUIDE.md`
+- `GO_TO_MARKET.md`
+- `BRAND_GUIDELINES.md`
+- `SECURITY.md`
+- `REVVEL_STANDARDS_S2M.md`
+- `package.json`
+- `scripts/test-baseline.js`
+- `scripts/build-baseline.js`
+
+## Run Baseline Validation
+
+```bash
+npm test
+npm run build
+```
+
 ## Architecture
 
 - `src/` - Core modules (face detection, enhancement, forensics)
@@ -85,12 +109,3 @@ python mcp/server.py
 ## License
 
 MIT License
-
----
-
-## Test
-
-| Feature | Status |
-|---------|--------|
-| Feature | ✅ Ready |
-
