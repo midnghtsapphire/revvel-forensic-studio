@@ -35,3 +35,32 @@ Three-year target framing: $10M cumulative revenue via blended SaaS + enterprise
 - Create case-study content for masked-face reconstruction and metadata recovery.
 - Partner with forensic consultants and legal-tech communities.
 - Add Stripe-backed self-serve plan checkout in web surface.
+
+## Research Engines and Suggestions
+
+### Research Engines
+1. **Market Intelligence Engine** — quarterly TAM/SAM/SOM updates, competitor tracking, and segment demand scoring.
+2. **Forensic Standards Engine** — continuous monitoring of NIST, Europol, and legal admissibility guidance.
+3. **Product Signal Engine** — collect API/MCP usage telemetry to prioritize high-value capabilities.
+4. **Revenue Engine** — pricing experiment tracking for conversion and expansion optimization.
+
+### Implementation Suggestions
+- Launch a public comparison demo showing raw vs enhanced vs forensic output.
+- Add role-based admin workflows for investigation teams.
+- Publish vertical landing pages for legal, security, and trust-and-safety buyers.
+
+## Assets and Artifacts Inventory
+
+### Core Assets
+- API service (`/api`)
+- CLI workflows (`/cli`)
+- MCP server (`/mcp`)
+- Vercel Website in Test endpoint in `README.md`
+
+### S2M Artifacts
+- `CHANGELOG.md`
+- `DEPLOYMENT_GUIDE.md`
+- `GO_TO_MARKET.md`
+- `BRAND_GUIDELINES.md`
+- `SECURITY.md`
+- `REVVEL_STANDARDS_S2M.md`

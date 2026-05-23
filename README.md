@@ -74,6 +74,7 @@ python mcp/server.py
 - `GO_TO_MARKET.md`
 - `BRAND_GUIDELINES.md`
 - `SECURITY.md`
+- `REVVEL_STANDARDS_S2M.md`
 - `package.json`
 - `scripts/test-baseline.js`
 - `scripts/build-baseline.js`

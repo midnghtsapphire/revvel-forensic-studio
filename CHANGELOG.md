@@ -10,6 +10,7 @@ All notable changes to this project are documented in this file.
   - `GO_TO_MARKET.md`
   - `BRAND_GUIDELINES.md`
   - `SECURITY.md`
+  - `REVVEL_STANDARDS_S2M.md`
 - Baseline repository validation scripts:
   - `scripts/test-baseline.js`
   - `scripts/build-baseline.js`
