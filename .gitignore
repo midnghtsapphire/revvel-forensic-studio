@@ -34,3 +34,4 @@ venv/
 !examples/*.png
 .DS_Store
 Thumbs.db
+node_modules/

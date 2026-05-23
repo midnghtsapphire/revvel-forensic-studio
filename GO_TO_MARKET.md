@@ -1,0 +1,37 @@
+# Go-To-Market Plan
+
+## Product Summary
+Revvel Forensic Studio provides image enhancement and forensic analysis through three channels: API, CLI, and MCP tools for agent workflows.
+
+## Value Analysis
+- **Investigations:** faster triage of masked/obscured faces and metadata evidence.
+- **Studio workflows:** one toolkit for enhancement + forensic checks.
+- **Developer integration:** API and MCP interfaces reduce custom tooling effort.
+
+## Priority Goals (S2M)
+1. Launch a public website-in-test on Vercel for end-to-end demos.
+2. Ship API + MCP deployment playbooks for technical buyers.
+3. Convert trial users into paid forensic analysis subscriptions.
+
+## Market Signals (Sourced)
+- Digital forensics software demand continues to grow with increased cybercrime and evidentiary workloads (Grand View Research, Market Research Future).
+- Generative AI and media authenticity concerns are driving demand for verification and forensic tooling (NIST media forensics programs, Europol threat reports).
+
+## Target Segments
+- Digital forensics consultants
+- Legal/investigative support teams
+- Security operations and trust/safety teams
+- Creative studios needing authenticity checks
+
+## Pricing and Revenue Projection
+- Starter: $99/month (individual analyst)
+- Team: $399/month (up to 10 seats)
+- Enterprise: custom annual contracts
+
+Three-year target framing: $10M cumulative revenue via blended SaaS + enterprise services.
+
+## Launch Motions
+- Publish technical demos from website-in-test.
+- Create case-study content for masked-face reconstruction and metadata recovery.
+- Partner with forensic consultants and legal-tech communities.
+- Add Stripe-backed self-serve plan checkout in web surface.
