@@ -21,4 +21,42 @@ if (missing.length > 0) {
   process.exit(1);
 }
 
+const readme = fs.readFileSync('README.md', 'utf8');
+const websiteHtmlPath = 'api/static/index.html';
+
+if (!fs.existsSync(websiteHtmlPath)) {
+  console.error(`Missing website surface: ${websiteHtmlPath}`);
+  process.exit(1);
+}
+
+const websiteHtml = fs.readFileSync(websiteHtmlPath, 'utf8');
+
+const readmeChecks = [
+  'https://revvel-forensic-studio.vercel.app',
+  '/api/static/index.html'
+];
+
+const websiteChecks = [
+  'Open Website in Test',
+  '/docs',
+  '/redoc',
+  '/health',
+  'Research engines',
+  'Assets and artifacts'
+];
+
+const missingReadmeChecks = readmeChecks.filter((needle) => !readme.includes(needle));
+if (missingReadmeChecks.length > 0) {
+  console.error('README is missing website-in-test traceability:');
+  missingReadmeChecks.forEach((needle) => console.error(`- ${needle}`));
+  process.exit(1);
+}
+
+const missingWebsiteChecks = websiteChecks.filter((needle) => !websiteHtml.includes(needle));
+if (missingWebsiteChecks.length > 0) {
+  console.error('Website surface is missing required S2M content:');
+  missingWebsiteChecks.forEach((needle) => console.error(`- ${needle}`));
+  process.exit(1);
+}
+
 console.log('Revvel-standards baseline test passed.');

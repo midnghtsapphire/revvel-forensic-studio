@@ -10,7 +10,10 @@ This repository ships three deployable surfaces:
 Target URL: `https://revvel-forensic-studio.vercel.app`
 
 Recommended structure for Vercel test surface:
+- Deploy the website source from `/api/static/index.html`.
 - Host a lightweight frontend/static interface that calls deployed API endpoints.
+- Preserve direct links to `/docs`, `/redoc`, and `/health`.
+- Keep the public website aligned with research engines, assets, artifacts, and pricing documented in repo artifacts.
 - Store API keys and webhooks as Vercel environment variables.
 
 ## 2) API Deployment (Container)
