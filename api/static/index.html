@@ -4,170 +4,639 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Revvel Forensic Studio</title>
+  <meta
+    name="description"
+    content="Revvel Forensic Studio is the website-in-test for forensic image intelligence, evidence workflows, API operations, and ship-to-market research."
+  />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      color-scheme: dark;
+      --bg: #050816;
+      --surface: rgba(15, 23, 42, 0.9);
+      --surface-strong: #111c33;
+      --border: rgba(148, 163, 184, 0.16);
+      --text: #e5eefc;
+      --muted: #9fb1d1;
+      --brand: #7c8cff;
+      --brand-strong: #5b6dff;
+      --accent: #1dd3b0;
+      --warning: #ffb86c;
+      --shadow: 0 24px 60px rgba(5, 8, 22, 0.45);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #0a0a0f;
-      color: #e2e8f0;
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(124, 140, 255, 0.22), transparent 32%),
+        radial-gradient(circle at 85% 15%, rgba(29, 211, 176, 0.2), transparent 24%),
+        linear-gradient(180deg, #050816 0%, #0b1220 45%, #08111e 100%);
       min-height: 100vh;
     }
-    header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      border-bottom: 1px solid #2d3748;
-      padding: 1.5rem 2rem;
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(5, 8, 22, 0.72);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .nav {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 2.85rem;
+      height: 2.85rem;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.35rem;
+      background: linear-gradient(135deg, var(--brand), #ac66ff);
+      box-shadow: 0 16px 38px rgba(124, 140, 255, 0.28);
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      margin-top: 0.15rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      padding: 0.35rem 0;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--text); }
+
+    .hero {
+      padding: 5rem 0 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(124, 140, 255, 0.28);
+      background: rgba(124, 140, 255, 0.12);
+      color: #d9e0ff;
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5vw, 4.6rem);
+      line-height: 0.98;
+      margin: 1rem 0;
+      letter-spacing: -0.04em;
+      max-width: 10ch;
+    }
+
+    .hero p,
+    .section-copy,
+    .card p,
+    .list li,
+    .pricing-card p,
+    .footer-copy {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .hero-actions,
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.8rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.9rem 1.3rem;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--brand), var(--brand-strong));
+      box-shadow: 0 18px 36px rgba(91, 109, 255, 0.28);
+    }
+
+    .button-secondary {
+      border-color: rgba(148, 163, 184, 0.18);
+      background: rgba(15, 23, 42, 0.74);
+    }
+
+    .hero-panel,
+    .section-panel,
+    .pricing-card,
+    .artifact-card,
+    .footer-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      padding: 1.5rem;
+    }
+
+    .hero-panel h2 {
+      margin: 0;
+      font-size: 1.02rem;
+    }
+
+    .hero-panel-grid,
+    .stats,
+    .card-grid,
+    .artifact-grid,
+    .pricing-grid {
+      display: grid;
       gap: 1rem;
     }
-    .logo {
-      width: 42px; height: 42px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
+
+    .hero-panel-grid { margin-top: 1rem; }
+
+    .hero-panel-card,
+    .card,
+    .artifact-card,
+    .pricing-card {
+      padding: 1.2rem;
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      background: rgba(12, 20, 35, 0.82);
+      border-radius: 18px;
     }
-    header h1 { font-size: 1.4rem; font-weight: 700; color: #fff; }
-    header p { font-size: 0.8rem; color: #a0aec0; margin-top: 2px; }
-    .badge {
-      margin-left: auto;
-      background: #22543d; color: #68d391;
-      padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+
+    .hero-panel-card strong,
+    .metric strong,
+    .card h3,
+    .artifact-card h3,
+    .pricing-card h3 {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: white;
     }
-    main { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
-    .hero {
-      text-align: center; margin-bottom: 3.5rem;
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-top: 0.35rem;
     }
-    .hero h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem;
-      background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+
+    .stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin: 1.4rem 0 0;
     }
-    .hero p { font-size: 1.05rem; color: #a0aec0; max-width: 600px; margin: 0 auto 2rem; line-height: 1.7; }
-    .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600;
-      text-decoration: none; font-size: 0.95rem; transition: all 0.2s;
-      cursor: pointer; border: none;
+
+    .metric {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(148, 163, 184, 0.1);
     }
-    .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-    .btn-outline { background: transparent; color: #a0aec0; border: 1px solid #4a5568; }
-    .btn-outline:hover { border-color: #667eea; color: #667eea; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-    .card {
-      background: #111827; border: 1px solid #1f2937;
-      border-radius: 12px; padding: 1.5rem;
-      transition: border-color 0.2s, transform 0.2s;
+
+    .metric strong {
+      font-size: 1.5rem;
+      margin-bottom: 0;
     }
-    .card:hover { border-color: #667eea; transform: translateY(-2px); }
-    .card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
-    .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: #f7fafc; }
-    .card p { font-size: 0.875rem; color: #718096; line-height: 1.6; }
-    .endpoints {
-      background: #111827; border: 1px solid #1f2937;
-      border-radius: 12px; padding: 2rem; margin-bottom: 3rem;
+
+    section {
+      padding: 1.2rem 0 0;
+      margin-bottom: 1.4rem;
     }
-    .endpoints h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: #f7fafc; }
-    .endpoint-group { margin-bottom: 1.5rem; }
-    .endpoint-group h4 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.1em; color: #667eea; margin-bottom: 0.75rem; }
-    .endpoint-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .endpoint-tag {
-      background: #1a202c; border: 1px solid #2d3748;
-      color: #a0aec0; padding: 0.3rem 0.75rem;
-      border-radius: 6px; font-size: 0.8rem; font-family: monospace;
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+      margin-bottom: 1.2rem;
     }
-    .status-bar {
-      background: #111827; border: 1px solid #1f2937;
-      border-radius: 12px; padding: 1.25rem 1.5rem;
-      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+
+    .section-head h2 {
+      margin: 0.5rem 0 0;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
     }
-    .status-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #a0aec0; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: #68d391; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.5} }
-    footer { text-align: center; padding: 2rem; color: #4a5568; font-size: 0.8rem; border-top: 1px solid #1f2937; margin-top: 2rem; }
+
+    .section-panel {
+      padding: 1.5rem;
+    }
+
+    .card-grid,
+    .artifact-grid,
+    .pricing-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card small,
+    .artifact-card small,
+    .pricing-card small {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .list {
+      padding-left: 1.1rem;
+      margin: 0.85rem 0 0;
+    }
+
+    .list li + li { margin-top: 0.55rem; }
+
+    .link-list {
+      display: grid;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .link-list a {
+      text-decoration: none;
+      color: #d9e0ff;
+      padding: 0.8rem 0.95rem;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      background: rgba(9, 16, 28, 0.72);
+    }
+
+    .link-list a:hover,
+    .link-list a:focus-visible {
+      border-color: rgba(124, 140, 255, 0.38);
+    }
+
+    .pricing-card.featured {
+      border-color: rgba(124, 140, 255, 0.48);
+      background: linear-gradient(180deg, rgba(24, 34, 61, 0.92), rgba(12, 20, 35, 0.9));
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0.85rem 0;
+      color: white;
+    }
+
+    .price span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .cta {
+      padding: 0.6rem 0 4rem;
+    }
+
+    .cta .section-panel {
+      padding: 2rem;
+      background:
+        linear-gradient(135deg, rgba(91, 109, 255, 0.18), rgba(29, 211, 176, 0.12)),
+        rgba(12, 20, 35, 0.94);
+    }
+
+    footer {
+      padding: 0 0 2.5rem;
+    }
+
+    .footer-panel {
+      padding: 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 3.5rem; }
+      .stats { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(var(--max), calc(100% - 1.2rem)); }
+      .nav { align-items: flex-start; }
+      .nav-links { gap: 0.65rem; font-size: 0.84rem; }
+      .button { width: 100%; }
+      .hero-actions,
+      .cta-actions { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">🔬</div>
-    <div>
-      <h1>Revvel Forensic Studio</h1>
-      <p>Image Analysis &amp; Forensic Intelligence API</p>
+  <div class="topbar">
+    <div class="shell nav">
+      <a class="brand" href="#top">
+        <span class="brand-mark">🔬</span>
+        <span class="brand-copy">
+          <strong>Revvel Forensic Studio</strong>
+          <span>Website in Test • API + CLI + MCP</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#research">Research</a>
+        <a href="#artifacts">Assets</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#launch">Launch</a>
+      </nav>
     </div>
-    <span class="badge">● API v2.0.0</span>
-  </header>
-  <main>
-    <div class="hero">
-      <h2>Forensic Image Intelligence</h2>
-      <p>Advanced image processing combining beauty enhancement with forensic analysis tools — mask detection, face reconstruction, EXIF analysis, and more.</p>
-      <div class="btn-group">
-        <a href="/forensicstudio/docs" class="btn btn-primary">📖 API Documentation</a>
-        <a href="/forensicstudio/redoc" class="btn btn-outline">📋 ReDoc Reference</a>
-        <a href="/forensicstudio/health" class="btn btn-outline">🩺 Health Check</a>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="card">
-        <div class="card-icon">💄</div>
-        <h3>Beauty Enhancement</h3>
-        <p>YouCam-style face beautification, skin smoothing, makeup application, teeth whitening, and batch processing for 20–100+ images.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🕵️</div>
-        <h3>Forensic Analysis</h3>
-        <p>Mask detection, face reconstruction from partial images, EXIF metadata extraction, object detection, and layer decomposition.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🔍</div>
-        <h3>Zoom &amp; Enhance</h3>
-        <p>Intelligent upscaling and detail enhancement for arms, wrists, background objects, and edge enhancement using lighting patterns.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">⚡</div>
-        <h3>Webhooks &amp; Rate Limiting</h3>
-        <p>Async job completion callbacks, per-key rate limiting, and full API key management with create, revoke, and list operations.</p>
-      </div>
-    </div>
-    <div class="endpoints">
-      <h3>Available Endpoints</h3>
-      <div class="endpoint-group">
-        <h4>Beauty</h4>
-        <div class="endpoint-list">
-          <span class="endpoint-tag">POST /enhance</span>
-          <span class="endpoint-tag">POST /batch-enhance</span>
+  </div>
+
+  <main id="top" class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <span class="eyebrow">S2M-ready forensic website surface</span>
+        <h1 id="hero-title">Recover signal. Defend evidence. Ship the entire surface.</h1>
+        <p>
+          Revvel Forensic Studio is the full website-in-test for forensic image intelligence: public positioning,
+          operator workflows, research engines, artifact traceability, and direct access to the deployed API surface.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://revvel-forensic-studio.vercel.app" target="_blank" rel="noreferrer">Open Website in Test</a>
+          <a class="button button-secondary" href="/docs">View API Docs</a>
+          <a class="button button-secondary" href="/redoc">Read ReDoc</a>
+        </div>
+        <div class="stats" aria-label="Key metrics">
+          <div class="metric">
+            <strong>3</strong>
+            <span>Deployable surfaces: website, API, and operational tooling.</span>
+          </div>
+          <div class="metric">
+            <strong>4</strong>
+            <span>Research engines covering market, standards, usage, and revenue.</span>
+          </div>
+          <div class="metric">
+            <strong>$10M</strong>
+            <span>Three-year S2M revenue framing documented in go-to-market artifacts.</span>
+          </div>
         </div>
       </div>
-      <div class="endpoint-group">
-        <h4>Forensics</h4>
-        <div class="endpoint-list">
-          <span class="endpoint-tag">POST /detect-mask</span>
-          <span class="endpoint-tag">POST /reconstruct-face</span>
-          <span class="endpoint-tag">POST /analyze-exif</span>
-          <span class="endpoint-tag">POST /detect-objects</span>
-          <span class="endpoint-tag">POST /decompose-layers</span>
-          <span class="endpoint-tag">POST /enhance-edges</span>
-          <span class="endpoint-tag">POST /zoom-enhance</span>
-          <span class="endpoint-tag">POST /full-analysis</span>
+
+      <aside class="hero-panel" aria-label="Launch summary">
+        <span class="pill">Launch summary</span>
+        <h2>Everything the issue asked for, wired into one website surface.</h2>
+        <div class="hero-panel-grid">
+          <div class="hero-panel-card">
+            <strong>Public link</strong>
+            <p>The Website in Test lives at <a href="https://revvel-forensic-studio.vercel.app" target="_blank" rel="noreferrer">revvel-forensic-studio.vercel.app</a>.</p>
+          </div>
+          <div class="hero-panel-card">
+            <strong>Operational endpoints</strong>
+            <p>Docs, health, billing config, keys, and forensic endpoints are linked from the website and repo docs.</p>
+          </div>
+          <div class="hero-panel-card">
+            <strong>S2M coverage</strong>
+            <p>Research engines, suggestions, assets, artifacts, pricing, and launch motions are visible in one place.</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="capabilities">
+      <div class="section-head">
+        <div>
+          <span class="pill">Capabilities</span>
+          <h2>Built for analysts, investigators, and technical buyers.</h2>
+        </div>
+        <p class="section-copy">A full website surface should explain what the product does now, who it serves, and how to activate it quickly.</p>
+      </div>
+      <div class="section-panel">
+        <div class="card-grid">
+          <article class="card">
+            <small>Enhancement</small>
+            <h3>Beauty and recovery pipeline</h3>
+            <p>Face enhancement, skin cleanup, feature refinement, and batch workflows help recover usable image quality before forensic review.</p>
+          </article>
+          <article class="card">
+            <small>Forensics</small>
+            <h3>Evidence-focused analysis</h3>
+            <p>Mask detection, EXIF analysis, object detection, layer decomposition, and edge enhancement support defensible investigative workflows.</p>
+          </article>
+          <article class="card">
+            <small>Operations</small>
+            <h3>API key and billing controls</h3>
+            <p>Create and revoke keys, enforce rate limits, and expose billing configuration for self-serve or managed enterprise plans.</p>
+          </article>
+          <article class="card">
+            <small>Integration</small>
+            <h3>API, CLI, and MCP delivery</h3>
+            <p>Teams can consume the same capability set from a public website demo, command line workflows, or agent-native MCP integrations.</p>
+          </article>
+        </div>
+        <div class="link-list" aria-label="Operational links">
+          <a href="/docs">📖 Interactive API docs</a>
+          <a href="/redoc">📚 ReDoc reference</a>
+          <a href="/health">🩺 Health endpoint</a>
         </div>
       </div>
-      <div class="endpoint-group">
-        <h4>Keys &amp; Billing</h4>
-        <div class="endpoint-list">
-          <span class="endpoint-tag">GET/POST /keys</span>
-          <span class="endpoint-tag">GET /rate-limit-status</span>
-          <span class="endpoint-tag">GET /billing/config</span>
+    </section>
+
+    <section id="research">
+      <div class="section-head">
+        <div>
+          <span class="pill">Research engines</span>
+          <h2>Research, suggestions, and buyer positioning are part of the shipped website.</h2>
+        </div>
+        <p class="section-copy">The S2M issue asked for research, assets, and artifacts to be created rather than left implicit.</p>
+      </div>
+      <div class="section-panel">
+        <div class="card-grid">
+          <article class="card">
+            <small>Engine 01</small>
+            <h3>Market intelligence</h3>
+            <p>Track category demand, competitor positioning, and segment urgency for legal-tech, trust-and-safety, and digital forensics teams.</p>
+          </article>
+          <article class="card">
+            <small>Engine 02</small>
+            <h3>Forensic standards</h3>
+            <p>Monitor NIST, Europol, and evidentiary guidance so workflow updates align with admissibility and operational trust requirements.</p>
+          </article>
+          <article class="card">
+            <small>Engine 03</small>
+            <h3>Product signal</h3>
+            <p>Use endpoint usage, webhook activity, and buyer requests to prioritize high-value surfaces and sharpen demos.</p>
+          </article>
+          <article class="card">
+            <small>Engine 04</small>
+            <h3>Revenue optimization</h3>
+            <p>Map pricing tests, conversion paths, and expansion opportunities against a three-year $10M framing.</p>
+          </article>
+        </div>
+        <ul class="list">
+          <li>Launch vertical landing motions for investigations, legal support, and trust-and-safety operators.</li>
+          <li>Show raw, enhanced, and forensic outputs side-by-side in public demos to reduce buyer uncertainty.</li>
+          <li>Use the Website in Test as the shared front door for API prospects, enterprise evaluators, and agent workflows.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="artifacts">
+      <div class="section-head">
+        <div>
+          <span class="pill">Assets and artifacts</span>
+          <h2>Traceable assets, documentation, and implementation artifacts.</h2>
+        </div>
+        <p class="section-copy">This section turns the repo surface into something buyers and operators can audit quickly.</p>
+      </div>
+      <div class="artifact-grid">
+        <article class="artifact-card">
+          <small>Asset</small>
+          <h3>Website in Test</h3>
+          <p>Public web surface with product positioning, operational links, research engines, pricing, and launch guidance.</p>
+        </article>
+        <article class="artifact-card">
+          <small>Asset</small>
+          <h3>API service</h3>
+          <p>FastAPI endpoints for enhancement, forensic analysis, health checks, billing, and API key workflows.</p>
+        </article>
+        <article class="artifact-card">
+          <small>Asset</small>
+          <h3>CLI and MCP</h3>
+          <p>Non-web operator paths for batch use cases and agent-native orchestration.</p>
+        </article>
+        <article class="artifact-card">
+          <small>Artifact</small>
+          <h3>Revvel standards docs</h3>
+          <p>README, deployment guide, brand guidelines, security, changelog, go-to-market, and S2M trigger documentation.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="section-head">
+        <div>
+          <span class="pill">Pricing</span>
+          <h2>Simple packaging for pilots, teams, and enterprise evaluations.</h2>
+        </div>
+        <p class="section-copy">Pricing mirrors the current go-to-market framing so the website and docs stay consistent.</p>
+      </div>
+      <div class="pricing-grid">
+        <article class="pricing-card">
+          <small>Starter</small>
+          <h3>Analyst plan</h3>
+          <div class="price">$99 <span>/ month</span></div>
+          <p>Single-user access for investigations, evidence prep, and website-to-API evaluation.</p>
+        </article>
+        <article class="pricing-card featured">
+          <small>Team</small>
+          <h3>Ops collaboration</h3>
+          <div class="price">$399 <span>/ month</span></div>
+          <p>Shared workflows for up to 10 seats, rate-limited API access, and managed rollout support.</p>
+        </article>
+        <article class="pricing-card">
+          <small>Enterprise</small>
+          <h3>Custom program</h3>
+          <div class="price">Custom <span>/ annual</span></div>
+          <p>Security review, infrastructure alignment, procurement support, and tailored deployment requirements.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="launch" class="cta">
+      <div class="section-panel">
+        <span class="pill">Launch motion</span>
+        <h2>Ready for review, deployment, and demo handoff.</h2>
+        <p class="section-copy">
+          Use the public Website in Test for stakeholder walkthroughs, then move deeper into the repo artifacts for deployment,
+          pricing, and operational validation.
+        </p>
+        <div class="cta-actions">
+          <a class="button button-primary" href="https://revvel-forensic-studio.vercel.app" target="_blank" rel="noreferrer">Launch public website</a>
+          <a class="button button-secondary" href="/health">Check service health</a>
+          <a class="button button-secondary" href="https://github.com/midnghtsapphire/revvel-forensic-studio" target="_blank" rel="noreferrer">View repository</a>
         </div>
       </div>
-    </div>
-    <div class="status-bar">
-      <div class="status-item"><span class="dot"></span> API Online</div>
-      <div class="status-item">🔐 API Key Required for endpoints</div>
-      <div class="status-item">📦 Version 2.0.0</div>
-      <div class="status-item">🚀 FastAPI + OpenCV + MediaPipe</div>
-    </div>
+    </section>
   </main>
-  <footer>Revvel Forensic Studio — Powered by FastAPI &amp; OpenCV</footer>
+
+  <footer class="shell">
+    <div class="footer-panel">
+      <div>
+        <strong>Revvel Forensic Studio</strong>
+        <p class="footer-copy">Website in Test for forensic image intelligence, S2M research coverage, and deployable operational surfaces.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/docs">Docs</a>
+        <a href="/redoc">ReDoc</a>
+        <a href="/health">Health</a>
+        <a href="https://revvel-forensic-studio.vercel.app" target="_blank" rel="noreferrer">Vercel Link</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

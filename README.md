@@ -65,6 +65,8 @@ python mcp/server.py
 ## Website in Test (Vercel)
 
 - URL: https://revvel-forensic-studio.vercel.app
+- Source website surface: `/api/static/index.html`
+- Built coverage: public landing page, research engines, pricing, assets/artifacts inventory, and direct API/docs links
 - Deployment automation: see `/DEPLOYMENT_GUIDE.md` for Vercel + container deployment steps.
 
 ## Revvel-Standards Artifacts

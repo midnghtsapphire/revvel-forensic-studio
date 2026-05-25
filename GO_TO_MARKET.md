@@ -48,10 +48,12 @@ Three-year target framing: $10M cumulative revenue via blended SaaS + enterprise
 - Launch a public comparison demo showing raw vs enhanced vs forensic output.
 - Add role-based admin workflows for investigation teams.
 - Publish vertical landing pages for legal, security, and trust-and-safety buyers.
+- Keep the Website in Test updated with pricing, research engines, assets, and artifact traceability so the public link doubles as a sales/demo surface.
 
 ## Assets and Artifacts Inventory
 
 ### Core Assets
+- Website source (`/api/static/index.html`)
 - API service (`/api`)
 - CLI workflows (`/cli`)
 - MCP server (`/mcp`)
