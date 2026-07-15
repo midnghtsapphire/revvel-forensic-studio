@@ -1,5 +1,9 @@
 # Revvel Forensic Studio
 
+
+<!-- AUTO-PACKAGE-BADGES:START -->
+
+<!-- AUTO-PACKAGE-BADGES:END -->
 Comprehensive image processing and forensic analysis application combining YouCam Perfect-style beauty/enhancement features with advanced forensic investigation tools.
 
 ## Features
